@@ -21,9 +21,14 @@ public class TransactionWithdrawCLI {
 
 		AccountWithdraw accountWithdraw = accountListingService.getClientWithdrawAccount(clientID, accountID);
 
-		double withdrawAmountMoney = withdrawDepositOperationCLIUI.requestClientAmount();
-		
-		transactionWithdraw.execute(accountWithdraw, withdrawAmountMoney);
+		if (accountWithdraw == null) {
+			System.out.println("Chosen account is not allowed to withdraw money");
+
+		} else {
+			double withdrawAmountMoney = withdrawDepositOperationCLIUI.requestClientAmount();
+
+			transactionWithdraw.execute(accountWithdraw, withdrawAmountMoney);
+		}
 
 	}
 
