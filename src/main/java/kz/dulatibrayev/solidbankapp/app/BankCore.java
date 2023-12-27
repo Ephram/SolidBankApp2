@@ -1,20 +1,22 @@
 package kz.dulatibrayev.solidbankapp.app;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import kz.dulatibrayev.solidbankapp.enums.AccountType;
 import kz.dulatibrayev.solidbankapp.services.interfaces.AccountCreationService;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class BankCore {
 	private static long id = 1;
 	private long lastAccountNumber = 1;
+	@Autowired
 	private AccountCreationService accountCreation;
-
-	public BankCore(AccountCreationService accountCreation) {
-		this.accountCreation = accountCreation;
-
-	}
 
 	public void createNewAccount(AccountType accountType, String clientID) {
 		accountCreation.create(accountType, Long.toString(id), clientID, lastAccountNumber);
+		
+		System.out.println(accountType.toString() + " account created");
 		incrementLastAccountNumber();
 	}
 

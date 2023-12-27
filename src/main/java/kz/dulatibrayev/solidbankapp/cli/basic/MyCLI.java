@@ -2,34 +2,38 @@ package kz.dulatibrayev.solidbankapp.cli.basic;
 
 import java.util.Scanner;
 
-import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy.Fixed;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import kz.dulatibrayev.solidbankapp.account.Account;
 import kz.dulatibrayev.solidbankapp.cli.interfaces.CLIUI;
 import kz.dulatibrayev.solidbankapp.enums.AccountType;
 
 public class MyCLI implements CLIUI {
+	@Autowired
 	private Scanner scanner;
 
 	public MyCLI(Scanner scanner) {
 		this.scanner = scanner;
 
 	}
+//
+//	public MyCLI() {
+//		this.scanner = new Scanner(System.in);
+//	}
 
-	public MyCLI() {
-		this.scanner = new Scanner(System.in);
+	public double requestClientAmount() {
+		System.out.println("Type amount of money ");
+		return Double.valueOf(this.scanner.nextLine());
 	}
 
-	double requestClientAmount() {
-		return 0;
-	}
+	public String requestClientAccountNumber() {
+		System.out.println("Please enter account ID");
 
-	String requestClientAccountNumber() {
-		return null;
+		return this.scanner.nextLine();
+
 	}
 
 	public AccountType requestAccountType() {
-
+		System.out.println("please enter one of the account type, <CHECKING - FIXED - SAVING>");
 		String accountType = scanner.nextLine();
 
 		if (accountType.equalsIgnoreCase(AccountType.FIXED.toString())) {
